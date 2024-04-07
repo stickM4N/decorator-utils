@@ -1,0 +1,22 @@
+repos:
+  -   repo: https://github.com/PyCQA/autoflake
+      rev: v2.2.1
+      hooks:
+      -   id: autoflake
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        name: isort (python)
+
+  - repo: https://github.com/hhatto/autopep8
+    rev: v2.0.4
+    hooks:
+      - id: autopep8
+        name: autopep
+
+      - id: autopep8
+        name: autopep aggressive
+        args:
+          - --aggressive

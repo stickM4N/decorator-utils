@@ -1,0 +1,74 @@
+[project]
+name = 'decorator-utils'
+dynamic = ['version']
+description = 'Simple and useful decorator utilities.'
+
+authors = [
+    { name = 'Julio C. Galindo', email = 'jcgalindo.jcgh@gmail.com' },
+]
+maintainers = []
+
+requires-python = '>=3.9'
+dependencies = []
+
+classifiers = [
+    'Development Status :: 5 - Production/Stable',
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: MIT License',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'Programming Language :: Python :: 3.13',
+]
+keywords = ['decorator', 'utilities']
+
+readme = { file = 'README.md', content-type = 'text/markdown' }
+license = { file = 'LICENSE' }
+
+[project.urls]
+Repository = 'https://github.com/stickm4n/decorator-utils'
+Documentation = 'https://github.com/stickm4n/decorator-utils/wiki'
+Issues = 'https://github.com/stickm4n/decorator-utils/issues'
+
+
+[build-system]
+requires = ['hatchling']
+build-backend = 'hatchling.build'
+
+
+[tool.hatch.version]
+path = 'decorator_utils/__init__.py'
+
+
+[tool.autoflake]
+remove-all-unused-imports = true
+recursive = true
+expand-star-imports = true
+ignore-init-module-imports = true
+remove-duplicate-keys = true
+remove-unused-variables = true
+ignore-pass-statements = true
+in-place = true
+quiet = true
+
+[tool.isort]
+line_length = 120
+lines_after_imports = 2
+lines_between_types = 1
+force_alphabetical_sort_within_sections = true
+float_to_top = true
+color_output = true
+treat_all_comments_as_code = true
+overwrite_in_place = true
+star_first = true
+quiet = true
+
+[tool.autopep8]
+in_place = true
+recursive = true
+aggressive = 1
+ignore = []
+max_line_length = 120
