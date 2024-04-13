@@ -1,0 +1,32 @@
+name: Publish PyPI
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  publish-pypi:
+    name: Build and publish release
+    runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Build
+        run: |
+          python3 -m pip install build --user
+          python3 -m build .
+
+      - name: Publish
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          verify-metadata: false
+          skip-existing: true
