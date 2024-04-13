@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from functools import wraps
-from typing import Any, Callable, Tuple
+from typing import Any, Callable, NoReturn, Tuple
 
 from decorator_utils.metadata import FunctionMetadata
 
@@ -25,7 +25,7 @@ def function_wrapper(pre_cb: Callable = None, post_cb: Callable = None, *,
     """
 
     def __decorator(decorated_function):
-        def __exec_callback(function: Callable, *args, insert_result: Any = None, **kwargs, ) -> Any:
+        def __exec_callback(function: Callable, *args, insert_result: Any = NoReturn, **kwargs, ) -> Any:
             """
             Utility to call functions and handle their supported `args` and `kwargs`.
             :param Callable function: Callback function.
@@ -43,7 +43,7 @@ def function_wrapper(pre_cb: Callable = None, post_cb: Callable = None, *,
 
                 kwargs = {p: v for p, v in kwargs.items() if metadata.accepts_kw_params([p])}
 
-            if insert_result is not None:  # Pass result as first arg if provided
+            if insert_result is not NoReturn:  # Pass result as first arg if provided
                 if isinstance(args, tuple):
                     args = list(args)
                 args.insert(0, insert_result)
@@ -65,7 +65,7 @@ def function_wrapper(pre_cb: Callable = None, post_cb: Callable = None, *,
             metadata.returns = type(result)
 
             if post_cb is not None:
-                __exec_callback(post_cb, *args, insert_result=result if use_result else None, **kwargs)
+                __exec_callback(post_cb, *args, insert_result=result if use_result else NoReturn, **kwargs)
 
             return (result, metadata) if return_metadata else result
 
