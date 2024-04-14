@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Any, Tuple, final
+from typing import Any, Callable, Tuple, final
 
 from .metadata import FunctionMetadata
 from .wrapper import function_wrapper
@@ -23,7 +23,7 @@ class DecoratorContext(ABC):
     ''' Whether to also return `_func_metadata` as result in a tuple (`result`, `metadata`). '''
 
     @final
-    def __init__(self, func):
+    def __init__(self, func: Callable):
         self._decorated_function = func
 
     @final
