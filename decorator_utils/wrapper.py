@@ -3,7 +3,7 @@ from __future__ import annotations
 from functools import wraps
 from typing import Any, Callable, NoReturn, Tuple
 
-from decorator_utils.metadata import FunctionMetadata
+from .metadata import FunctionMetadata
 
 
 def function_wrapper(pre_cb: Callable = None, post_cb: Callable = None, *,

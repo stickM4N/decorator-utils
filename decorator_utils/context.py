@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Any, final, Tuple
+from typing import Any, Tuple, final
 
-from decorator_utils import function_wrapper, FunctionMetadata
+from .metadata import FunctionMetadata
+from .wrapper import function_wrapper
 
 
 class DecoratorContext(ABC):
