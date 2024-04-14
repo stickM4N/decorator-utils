@@ -58,12 +58,15 @@ quiet = true
 line_length = 120
 lines_after_imports = 2
 lines_between_types = 1
-force_alphabetical_sort_within_sections = true
+case_sensitive = true
+honor_case_in_force_sorted_sections = true
+force_alphabetical_sort_within_sections = false
 float_to_top = true
 color_output = true
 treat_all_comments_as_code = true
 overwrite_in_place = true
 star_first = true
+use_parentheses = true
 quiet = true
 
 [tool.autopep8]
