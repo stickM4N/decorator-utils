@@ -1,20 +1,16 @@
 from dataclasses import dataclass
 from inspect import Parameter, signature
-from typing import Any, Callable, List, NoReturn, Type
+from typing import Callable, List, NoReturn
 
 
 @dataclass
 class FunctionMetadata:
     """
     Class to store function metadata.
+    :var str name: Name of the wrapped function.
+    :var List[Parameter] params: Parameters of the function.
+    :var Type[Any] returns: Parameters of the function. NoReturn type will be provided by default (not auto-generated).
     """
-
-    name: str
-    ''' Name of the wrapped function. '''
-    params: List[Parameter]
-    ''' Parameters of the function. '''
-    returns: Type[Any]
-    ''' Parameters of the function. NoReturn type will be provided by default (not auto-generated). '''
 
     def __init__(self, function: Callable):
         if not isinstance(function, Callable):

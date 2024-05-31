@@ -45,15 +45,14 @@ from typing import final
 from decorator_utils import DecoratorContext
 
 
+@final
 class TraceCall(DecoratorContext):
     __time: int
 
-    @final
     def pre_cb(self, *args, **kwargs) -> None:
         self.__time = perf_counter_ns()
         print(f'Starting function call with args `{args}` and kwargs `{kwargs}`.')
 
-    @final
     def post_cb(self, result, *args, **kwargs) -> None:
         elapsed_time = (perf_counter_ns() - self.__time) / 1e+9
         print(f'Function took {elapsed_time} seconds to return value `{result}`.')

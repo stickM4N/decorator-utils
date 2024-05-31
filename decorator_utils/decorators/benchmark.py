@@ -6,23 +6,25 @@ from ..context import DecoratorContext
 from ..metadata import FunctionMetadata
 
 
+@final
 class Benchmark(DecoratorContext):
+    """
+    Decorator to benchmark function execution. Logs function call time after it returns to the stream.
+    :var int __time: Function call start time.
+    :var str _format: Format of the string to print to `_stram`. First param is function name, second param is
+    execution time in seconds with nanoseconds precision.
+    :var SupportsWrite[str] _stram: Output stream. Defaults to stdout
+    """
     __time: int
-    ''' Function call start time. '''
 
     _format: str = 'Function `{}` execution took {:.6f} seconds to finish.'
-    ''' Format of the string to print to `_file`. First param is function name, second param is execution time in
-    seconds with nanoseconds precision. '''
-    _file = stdout
-    ''' Output stream of type SupportsWrite[str]. '''
+    _stram = stdout
 
-    @final
     def pre_cb(self, *args, **kwargs) -> None:
         self.__time = perf_counter_ns()
 
-    @final
     def post_cb(self, *args, **kwargs) -> None:
         elapsed_time = (perf_counter_ns() - self.__time) / 1e+9
         function = FunctionMetadata(self._decorated_function).name
 
-        print(self._format.format(function, elapsed_time), file=self._file)
+        print(self._format.format(function, elapsed_time), file=self._stram)
