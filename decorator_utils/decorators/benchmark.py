@@ -10,10 +10,14 @@ from ..metadata import FunctionMetadata
 class Benchmark(DecoratorContext):
     """
     Decorator to benchmark function execution. Logs function call time after it returns to the stream.
-    :var int __time: Function call start time.
-    :var str _format: Format of the string to print to `_stram`. First param is function name, second param is
-    execution time in seconds with nanoseconds precision.
-    :var SupportsWrite[str] _stram: Output stream. Defaults to stdout
+
+    :var __time: Function call start time.
+    :vartype __time: int
+    :var _format: Format of the string to print to `_stram`. First param is function name, second param is execution
+        time in seconds with nanoseconds precision.
+    :vartype _format: str
+    :var _stram: Output stream. Defaults to stdout.
+    :vartype _stram: SupportsWrite[str]
     """
     __time: int
 
