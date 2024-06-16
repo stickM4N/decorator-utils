@@ -6,7 +6,7 @@ Installation
 ------------
 
 ```shell
-python3 -m pip install decorator-utils
+python -m pip install decorator-utils
 ```
 
 Usage
