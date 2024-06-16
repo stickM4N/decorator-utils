@@ -12,15 +12,20 @@ class DecoratorContext(ABC):
     Decorator class that provides an interface to implement a decorator with the ability to retain data between
     `pre_cb` and `post_cb` callbacks. It works with `function_wrapper` in the back and its parameters are matched
     against this class attributes.
+
+    :var _use_result: Whether to pass decorated function result to `post_func` as first arg.
+    :vartype _use_result: bool
+    :var _force_args: Whether to force `args` or `kwargs` to be passed tho callback functions.
+    :vartype _force_args: bool
+    :var _forward_metadata: Whether to add `_func_metadata` to `kwargs`.
+    :vartype _forward_metadata: bool
+    :var _return_metadata: Whether to also return `_func_metadata` as result in a tuple (`result`, `metadata`).
+    :vartype _return_metadata: bool
     """
     _use_result: bool = True
-    ''' Whether to pass decorated function result to `post_func` as first arg. '''
     _force_args: bool = True
-    ''' Whether to force `args` or `kwargs` to be passed tho callback functions. '''
     _forward_metadata: bool = False
-    ''' Whether to add `_func_metadata` to `kwargs`. '''
     _return_metadata: bool = False
-    ''' Whether to also return `_func_metadata` as result in a tuple (`result`, `metadata`). '''
 
     @final
     def __init__(self, func: Callable):
@@ -37,8 +42,10 @@ class DecoratorContext(ABC):
 
     @abstractmethod
     def pre_cb(self, *args, **kwargs) -> None:
+        """ Function to execute before the wrapped function is called. """
         raise NotImplementedError
 
     @abstractmethod
     def post_cb(self, *args, **kwargs) -> None:
+        """ Function to execute after the wrapped function is called. """
         raise NotImplementedError

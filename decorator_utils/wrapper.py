@@ -13,24 +13,39 @@ def function_wrapper(pre_cb: Callable = None, post_cb: Callable = None, *,
     Decorator to wrap a function and execute callbacks before and after its execution.
     Both callback functions take the wrapped function parameters plus a `FunctionMetadata` object instance as
     `_func_metadata` kwarg if the function accepts them.
+
     Callback function will not get `args` or `kwargs` if they are not accepted unless they are forced and will check if
     they are accepted using their names.
-    :param Callable pre_cb: Callback to execute before the wrapped function.
-    :param Callable post_cb: Callback to execute after the wrapped function.
-    :param bool use_result: Whether to pass decorated function result to `post_func` as first arg.
-    :param bool force_args: Whether to force `args` or `kwargs` to be passed tho callback functions.
-    :param bool forward_metadata: Whether to add `_func_metadata` to `kwargs`.
-    :param bool return_metadata: Whether to also return `_func_metadata` as result in a tuple (`result`, `metadata`).
-    :return Callable[[...], Any | Tuple[Any, FunctionMetadata]]: The wrapped function return value.
+
+    :param pre_cb: Callback to execute before the wrapped function.
+    :type pre_cb: Callable
+    :param post_cb: Callback to execute after the wrapped function.
+    :type post_cb: Callable
+    :param use_result: Whether to pass decorated function result to `post_func` as first arg.
+    :type use_result: bool
+    :param force_args: Whether to force `args` or `kwargs` to be passed tho callback functions.
+    :type force_args: bool
+    :param forward_metadata: Whether to add `_func_metadata` to `kwargs`.
+    :type forward_metadata: bool
+    :param return_metadata: Whether to also return `_func_metadata` as result in a tuple (`result`, `metadata`).
+    :type return_metadata: bool
+
+    :returns: The wrapped function return value.
+    :rtype: Callable[[...], Any | Tuple[Any, FunctionMetadata]]
     """
 
     def __decorator(decorated_function) -> Callable[[...], Any | Tuple[Any, FunctionMetadata]]:
         def __exec_callback(function: Callable, *args, insert_result: Any = NoReturn, **kwargs) -> Any:
             """
             Utility to call functions and handle their supported `args` and `kwargs`.
-            :param Callable function: Callback function.
-            :param Any insert_result: Pass this value as first arg to the function if provided.
-            :return: Any | Tuple[Any, ...]: The wrapped function return value.
+
+            :param function: Callback function.
+            :type function: Callable
+            :param insert_result: Pass this value as first arg to the function if provided.
+            :type insert_result: Any
+
+            :returns: The wrapped function return value.
+            :rtype: Any | Tuple[Any, ...]
             """
 
             if not force_args:
